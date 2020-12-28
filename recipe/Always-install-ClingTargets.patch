@@ -1,0 +1,27 @@
+From 117140917e53467210cad9ab7bbd2fadb310992c Mon Sep 17 00:00:00 2001
+From: Chris Burr <chrisburr@users.noreply.github.com>
+Date: Mon, 28 Dec 2020 11:30:32 +0100
+Subject: [PATCH] Always install ClingTargets.cmake
+
+---
+ cmake/modules/CMakeLists.txt | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
+
+diff --git a/cmake/modules/CMakeLists.txt b/cmake/modules/CMakeLists.txt
+index 1e31e451e..fc02f0bfc 100644
+--- a/cmake/modules/CMakeLists.txt
++++ b/cmake/modules/CMakeLists.txt
+@@ -53,11 +53,8 @@ set(CLING_CONFIG_CMAKE_DIR)
+ set(CLING_CONFIG_EXPORTS_FILE)
+ 
+ if (NOT LLVM_INSTALL_TOOLCHAIN_ONLY)
+-  get_property(cling_has_exports GLOBAL PROPERTY CLING_HAS_EXPORTS)
+-  if(cling_has_exports)
+-    install(EXPORT ClingTargets DESTINATION ${CLING_INSTALL_PACKAGE_DIR}
+-            COMPONENT cling-cmake-exports)
+-  endif()
++  install(EXPORT ClingTargets DESTINATION ${CLING_INSTALL_PACKAGE_DIR}
++          COMPONENT cling-cmake-exports)
+ 
+   install(FILES
+     ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/ClingConfig.cmake
