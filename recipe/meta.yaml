@@ -1,7 +1,7 @@
 {% set name = "cling" %}
 {% set version = "0.8" %}
 {% set sha256 = "cb72186edd8b1ccc0662542c70b02725891e2405aecd5631066972e421b51259" %}
-{% set build_number = 0 %}
+{% set build_number = 2 %}
 {% set clang_version = [9, 0, 1] %}
 
 package:
@@ -12,11 +12,14 @@ source:
   # url: https://github.com/root-project/cling/archive/v{{ version }}.tar.gz
   # sha256: {{ sha256 }}
   # git_url: https://github.com/vgvassilev/root.git
-  git_url: https://github.com/vgvassilev/cling.git
-  git_rev: upgrade_llvm90
+  # git_url: https://github.com/vgvassilev/cling.git
+  # git_rev: upgrade_llvm90
+  git_url: https://github.com/root-project/cling.git
+  git_rev: master
   patches:
-   - use-findpackage.patch
    - Always-install-ClingTargets.patch
+   - 0001-Fix-installing-headers.patch
+   - use-findpackage.patch
   #  # Export all symbols on windows to generate import library
   #  - patches/0001-Export-all-symbols-on-windows.patch
   #  # Do not build Jupyter kernel - use xeus-cling instead
@@ -60,8 +63,8 @@ test:
     - test -f $PREFIX/lib/cmake/cling/ClingTargets.cmake  # [unix]
     - if exist %LIBRARY_PREFIX%\\bin\\libcling.dll (exit 0) else (exit 1)  # [win]
     - if exist %LIBRARY_PREFIX%\\lib\\libcling.lib (exit 0) else (exit 1)  # [win]
-    # - cling '2+3; 0'
-    # - cling '#include <vector>'
+    - cling '2+3; 0'
+    - cling '#include <vector>'
 
 about:
   dev_url: https://github.com/root-project/cling

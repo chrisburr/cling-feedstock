@@ -1,0 +1,25 @@
+From b86adfa22121cebcba385718d13dea730e7e018a Mon Sep 17 00:00:00 2001
+From: Chris Burr <christopher.burr@cern.ch>
+Date: Fri, 12 Mar 2021 15:16:36 +0100
+Subject: [PATCH] Fix installing headers
+
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 416a8a69..ec6b571c 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -479,7 +479,7 @@ if (NOT LLVM_INSTALL_TOOLCHAIN_ONLY)
+     PATTERN ".svn" EXCLUDE
+     )
+ 
+-  install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/include/cling
++  install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/cling
+     DESTINATION include
+     FILES_MATCHING
+     PATTERN "CMakeFiles" EXCLUDE
+-- 
+2.29.2
+
